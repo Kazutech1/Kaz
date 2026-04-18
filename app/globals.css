@@ -68,6 +68,12 @@ body {
   90% { transform: translate(-10%, 10%); }
 }
 
+@media (pointer: coarse) {
+  .grain {
+    animation: none;
+  }
+}
+
 /* Industrial Components */
 .brutalist-card {
   @apply bg-carbon-800 border-2 border-carbon-700 p-8 relative transition-all duration-300;

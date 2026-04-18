@@ -4,12 +4,19 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function ScrollPath() {
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
+  
   const pathLength = useSpring(scrollYProgress, {
     stiffness: 50,
     damping: 20,
     restDelta: 0.001
   });
+
+  useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsMobile(isTouch);
+  }, []);
 
   // A more complex, mechanical path with hard angles and subtle curves
   const mainPath = "M 5 0 V 100 H 95 V 300 H 5 V 500 H 95 V 700 H 5 V 900 H 50 V 1000";
@@ -33,23 +40,35 @@ export default function ScrollPath() {
         />
         
         {/* Animated Main Conduit */}
-        <motion.path
-          d={mainPath}
-          fill="none"
-          stroke="#ff4d00"
-          strokeWidth="0.5"
-          style={{ pathLength }}
-        />
+        {isMobile ? (
+          <path
+            d={mainPath}
+            fill="none"
+            stroke="#ff4d00"
+            strokeWidth="0.5"
+            opacity="0.3"
+          />
+        ) : (
+          <motion.path
+            d={mainPath}
+            fill="none"
+            stroke="#ff4d00"
+            strokeWidth="0.5"
+            style={{ pathLength }}
+          />
+        )}
 
         {/* Animated Secondary Conduit */}
-        <motion.path
-          d={secondaryPath}
-          fill="none"
-          stroke="#f5f5f7"
-          strokeWidth="0.2"
-          opacity="0.3"
-          style={{ pathLength }}
-        />
+        {!isMobile && (
+          <motion.path
+            d={secondaryPath}
+            fill="none"
+            stroke="#f5f5f7"
+            strokeWidth="0.2"
+            opacity="0.3"
+            style={{ pathLength }}
+          />
+        )}
 
         {/* Accent Nodes (Circles at corners) */}
         {[100, 300, 500, 700, 900].map((y) => (
