@@ -161,6 +161,10 @@ export default function Home() {
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
+    // Check if device has touch capability
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
@@ -183,7 +187,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative bg-carbon-900 min-h-screen selection:bg-accent selection:text-white overflow-x-hidden">
+    <main className="relative bg-carbon-900 min-h-screen selection:bg-accent selection:text-white">
       <div className="grain" />
       <div 
         className={`custom-cursor ${hovering ? 'hovering' : ''}`}
@@ -315,7 +319,7 @@ export default function Home() {
               </div>
               <div className="space-y-4 md:space-y-6 text-base md:text-xl text-oxy-200/80 leading-relaxed font-medium">
                 <p>
-                  Frontend developer with <span className="text-oxy-100 font-bold">3+ years</span> building production web and mobile applications using React, Next.js, and React Native.
+                  FullStack developer with <span className="text-oxy-100 font-bold">3+ years</span> building production web and mobile applications using React, Next.js, Node.js, Express.js, MongoDB, PostgreSQL and React Native.
                 </p>
                 <p>
                   Proven track record in startup environments — from <span className="text-oxy-100 font-bold">MVP to live product</span> — with strong fundamentals in JavaScript, TypeScript, component architecture, and API integration.

@@ -14,13 +14,13 @@ export default function Section({ id, label, children }: SectionProps) {
   const isInView = useInView(ref, { once: false, amount: 0.2 });
 
   return (
-    <section id={id} ref={ref} className="min-h-screen flex items-center py-16 md:py-24 px-5 md:px-24 overflow-x-hidden">
+    <section id={id} ref={ref} className="min-h-screen flex items-center py-16 md:py-24 px-5 md:px-24">
       <motion.div
         className="w-full max-w-7xl mx-auto"
-        initial={{ opacity: 0, scale: 0.95, y: 100, filter: "blur(20px)" }}
-        whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex items-center gap-4 mb-12">
           <span className="h-[2px] w-12 bg-accent" />
